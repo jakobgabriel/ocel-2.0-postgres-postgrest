@@ -23,14 +23,22 @@ SET row_security = off;
 --WHERE pg_stat_activity.datname = 'ocelv2' 
 --  AND pid <> pg_backend_pid();
 
-DROP DATABASE ocelv2;
+DROP DATABASE IF EXISTS ocelv2;
 
 --
 -- TOC entry 3407 (class 1262 OID 16623)
 -- Name: ocelv2; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE ocelv2 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'German_Germany.1252';
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'ocelv2') THEN
+        CREATE DATABASE ocelv2 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'German_Germany.1252';
+    END IF;
+END
+$$;
+
+-- CREATE DATABASE ocelv2 
 
 
 ALTER DATABASE ocelv2 OWNER TO postgres;

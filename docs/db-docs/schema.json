@@ -1,0 +1,1050 @@
+{
+    "name": "ocelv2",
+    "desc": "",
+    "tables": [
+        {
+            "name": "public.event",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "event_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('event_event_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "event_type_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "timestamp",
+                    "type": "timestamp without time zone",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "event_pkey",
+                    "def": "CREATE UNIQUE INDEX event_pkey ON public.event USING btree (event_id)",
+                    "table": "public.event",
+                    "columns": [
+                        "event_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "event_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (event_id)",
+                    "table": "public.event",
+                    "referenced_table": "",
+                    "columns": [
+                        "event_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "event_event_type_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (event_type_id) REFERENCES event_type(event_type_id)",
+                    "table": "public.event",
+                    "referenced_table": "event_type",
+                    "columns": [
+                        "event_type_id"
+                    ],
+                    "referenced_columns": [
+                        "event_type_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.event_attribute",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "event_attribute_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('event_attribute_event_attribute_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "event_type_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "name",
+                    "type": "varchar(255)",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "event_attribute_pkey",
+                    "def": "CREATE UNIQUE INDEX event_attribute_pkey ON public.event_attribute USING btree (event_attribute_id)",
+                    "table": "public.event_attribute",
+                    "columns": [
+                        "event_attribute_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "event_attribute_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (event_attribute_id)",
+                    "table": "public.event_attribute",
+                    "referenced_table": "",
+                    "columns": [
+                        "event_attribute_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "event_attribute_event_type_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (event_type_id) REFERENCES event_type(event_type_id)",
+                    "table": "public.event_attribute",
+                    "referenced_table": "event_type",
+                    "columns": [
+                        "event_type_id"
+                    ],
+                    "referenced_columns": [
+                        "event_type_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.event_attribute_value",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "event_attribute_value_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('event_attribute_value_event_attribute_value_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "event_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "event_attribute_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "value",
+                    "type": "json",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "event_attribute_value_pkey",
+                    "def": "CREATE UNIQUE INDEX event_attribute_value_pkey ON public.event_attribute_value USING btree (event_attribute_value_id)",
+                    "table": "public.event_attribute_value",
+                    "columns": [
+                        "event_attribute_value_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "event_attribute_value_event_attribute_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (event_attribute_id) REFERENCES event_attribute(event_attribute_id)",
+                    "table": "public.event_attribute_value",
+                    "referenced_table": "event_attribute",
+                    "columns": [
+                        "event_attribute_id"
+                    ],
+                    "referenced_columns": [
+                        "event_attribute_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "event_attribute_value_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (event_attribute_value_id)",
+                    "table": "public.event_attribute_value",
+                    "referenced_table": "",
+                    "columns": [
+                        "event_attribute_value_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "event_attribute_value_event_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (event_id) REFERENCES event(event_id)",
+                    "table": "public.event_attribute_value",
+                    "referenced_table": "event",
+                    "columns": [
+                        "event_id"
+                    ],
+                    "referenced_columns": [
+                        "event_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.event_object_relationship",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "event_object_relationship_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('event_object_relationship_event_object_relationship_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "event_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "object_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "qualifier_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "event_object_relationship_pkey",
+                    "def": "CREATE UNIQUE INDEX event_object_relationship_pkey ON public.event_object_relationship USING btree (event_object_relationship_id)",
+                    "table": "public.event_object_relationship",
+                    "columns": [
+                        "event_object_relationship_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "event_object_relationship_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (event_object_relationship_id)",
+                    "table": "public.event_object_relationship",
+                    "referenced_table": "",
+                    "columns": [
+                        "event_object_relationship_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "event_object_relationship_event_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (event_id) REFERENCES event(event_id)",
+                    "table": "public.event_object_relationship",
+                    "referenced_table": "event",
+                    "columns": [
+                        "event_id"
+                    ],
+                    "referenced_columns": [
+                        "event_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "event_object_relationship_object_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_id) REFERENCES object(object_id)",
+                    "table": "public.event_object_relationship",
+                    "referenced_table": "object",
+                    "columns": [
+                        "object_id"
+                    ],
+                    "referenced_columns": [
+                        "object_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "event_object_relationship_qualifier_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (qualifier_id) REFERENCES qualifier(qualifier_id)",
+                    "table": "public.event_object_relationship",
+                    "referenced_table": "qualifier",
+                    "columns": [
+                        "qualifier_id"
+                    ],
+                    "referenced_columns": [
+                        "qualifier_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.event_type",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "event_type_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('event_type_event_type_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "name",
+                    "type": "varchar(255)",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "event_type_pkey",
+                    "def": "CREATE UNIQUE INDEX event_type_pkey ON public.event_type USING btree (event_type_id)",
+                    "table": "public.event_type",
+                    "columns": [
+                        "event_type_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "event_type_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (event_type_id)",
+                    "table": "public.event_type",
+                    "referenced_table": "",
+                    "columns": [
+                        "event_type_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.object",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "object_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('object_object_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "object_type_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "object_pkey",
+                    "def": "CREATE UNIQUE INDEX object_pkey ON public.object USING btree (object_id)",
+                    "table": "public.object",
+                    "columns": [
+                        "object_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "object_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (object_id)",
+                    "table": "public.object",
+                    "referenced_table": "",
+                    "columns": [
+                        "object_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "object_object_type_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_type_id) REFERENCES object_type(object_type_id)",
+                    "table": "public.object",
+                    "referenced_table": "object_type",
+                    "columns": [
+                        "object_type_id"
+                    ],
+                    "referenced_columns": [
+                        "object_type_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.object_attribute",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "object_attribute_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('object_attribute_object_attribute_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "object_type_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "name",
+                    "type": "varchar(255)",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "object_attribute_pkey",
+                    "def": "CREATE UNIQUE INDEX object_attribute_pkey ON public.object_attribute USING btree (object_attribute_id)",
+                    "table": "public.object_attribute",
+                    "columns": [
+                        "object_attribute_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "object_attribute_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (object_attribute_id)",
+                    "table": "public.object_attribute",
+                    "referenced_table": "",
+                    "columns": [
+                        "object_attribute_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "object_attribute_object_type_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_type_id) REFERENCES object_type(object_type_id)",
+                    "table": "public.object_attribute",
+                    "referenced_table": "object_type",
+                    "columns": [
+                        "object_type_id"
+                    ],
+                    "referenced_columns": [
+                        "object_type_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.object_attribute_value",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "object_attribute_value_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('object_attribute_value_object_attribute_value_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "object_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "object_attribute_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "timestamp",
+                    "type": "timestamp without time zone",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "value",
+                    "type": "json",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "object_attribute_value_pkey",
+                    "def": "CREATE UNIQUE INDEX object_attribute_value_pkey ON public.object_attribute_value USING btree (object_attribute_value_id)",
+                    "table": "public.object_attribute_value",
+                    "columns": [
+                        "object_attribute_value_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "object_attribute_value_object_attribute_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_attribute_id) REFERENCES object_attribute(object_attribute_id)",
+                    "table": "public.object_attribute_value",
+                    "referenced_table": "object_attribute",
+                    "columns": [
+                        "object_attribute_id"
+                    ],
+                    "referenced_columns": [
+                        "object_attribute_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "object_attribute_value_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (object_attribute_value_id)",
+                    "table": "public.object_attribute_value",
+                    "referenced_table": "",
+                    "columns": [
+                        "object_attribute_value_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "object_attribute_value_object_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_id) REFERENCES object(object_id)",
+                    "table": "public.object_attribute_value",
+                    "referenced_table": "object",
+                    "columns": [
+                        "object_id"
+                    ],
+                    "referenced_columns": [
+                        "object_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.object_relationship",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "object_relationship_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('object_relationship_object_relationship_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "object_parent_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "object_child_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                },
+                {
+                    "name": "qualifier_id",
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "fk_object_hierarchy",
+                    "def": "CREATE UNIQUE INDEX fk_object_hierarchy ON public.object_relationship USING btree (object_parent_id, object_child_id)",
+                    "table": "public.object_relationship",
+                    "columns": [
+                        "object_child_id",
+                        "object_parent_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "object_relationship_pkey",
+                    "def": "CREATE UNIQUE INDEX object_relationship_pkey ON public.object_relationship USING btree (object_relationship_id)",
+                    "table": "public.object_relationship",
+                    "columns": [
+                        "object_relationship_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "fk_object_hierarchy",
+                    "type": "UNIQUE",
+                    "def": "UNIQUE (object_parent_id, object_child_id)",
+                    "table": "public.object_relationship",
+                    "referenced_table": "",
+                    "columns": [
+                        "object_parent_id",
+                        "object_child_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "object_relationship_object_child_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_child_id) REFERENCES object(object_id)",
+                    "table": "public.object_relationship",
+                    "referenced_table": "object",
+                    "columns": [
+                        "object_child_id"
+                    ],
+                    "referenced_columns": [
+                        "object_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "object_relationship_object_parent_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (object_parent_id) REFERENCES object(object_id)",
+                    "table": "public.object_relationship",
+                    "referenced_table": "object",
+                    "columns": [
+                        "object_parent_id"
+                    ],
+                    "referenced_columns": [
+                        "object_id"
+                    ],
+                    "comment": ""
+                },
+                {
+                    "name": "object_relationship_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (object_relationship_id)",
+                    "table": "public.object_relationship",
+                    "referenced_table": "",
+                    "columns": [
+                        "object_relationship_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                },
+                {
+                    "name": "object_relationship_qualifier_id_fkey",
+                    "type": "FOREIGN KEY",
+                    "def": "FOREIGN KEY (qualifier_id) REFERENCES qualifier(qualifier_id)",
+                    "table": "public.object_relationship",
+                    "referenced_table": "qualifier",
+                    "columns": [
+                        "qualifier_id"
+                    ],
+                    "referenced_columns": [
+                        "qualifier_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.object_type",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "object_type_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('object_type_object_type_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "name",
+                    "type": "varchar(255)",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "object_type_pkey",
+                    "def": "CREATE UNIQUE INDEX object_type_pkey ON public.object_type USING btree (object_type_id)",
+                    "table": "public.object_type",
+                    "columns": [
+                        "object_type_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "object_type_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (object_type_id)",
+                    "table": "public.object_type",
+                    "referenced_table": "",
+                    "columns": [
+                        "object_type_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        },
+        {
+            "name": "public.qualifier",
+            "type": "BASE TABLE",
+            "comment": "",
+            "columns": [
+                {
+                    "name": "qualifier_id",
+                    "type": "integer",
+                    "nullable": false,
+                    "default": "nextval('qualifier_qualifier_id_seq'::regclass)",
+                    "comment": ""
+                },
+                {
+                    "name": "value",
+                    "type": "json",
+                    "nullable": false,
+                    "default": null,
+                    "comment": ""
+                }
+            ],
+            "indexes": [
+                {
+                    "name": "qualifier_pkey",
+                    "def": "CREATE UNIQUE INDEX qualifier_pkey ON public.qualifier USING btree (qualifier_id)",
+                    "table": "public.qualifier",
+                    "columns": [
+                        "qualifier_id"
+                    ],
+                    "comment": ""
+                }
+            ],
+            "constraints": [
+                {
+                    "name": "qualifier_pkey",
+                    "type": "PRIMARY KEY",
+                    "def": "PRIMARY KEY (qualifier_id)",
+                    "table": "public.qualifier",
+                    "referenced_table": "",
+                    "columns": [
+                        "qualifier_id"
+                    ],
+                    "referenced_columns": [],
+                    "comment": ""
+                }
+            ],
+            "triggers": [],
+            "def": ""
+        }
+    ],
+    "relations": [
+        {
+            "table": "public.event",
+            "columns": [
+                "event_type_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.event_type",
+            "parent_columns": [
+                "event_type_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (event_type_id) REFERENCES event_type(event_type_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.event_attribute",
+            "columns": [
+                "event_type_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.event_type",
+            "parent_columns": [
+                "event_type_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (event_type_id) REFERENCES event_type(event_type_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.event_attribute_value",
+            "columns": [
+                "event_attribute_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.event_attribute",
+            "parent_columns": [
+                "event_attribute_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (event_attribute_id) REFERENCES event_attribute(event_attribute_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.event_attribute_value",
+            "columns": [
+                "event_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.event",
+            "parent_columns": [
+                "event_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (event_id) REFERENCES event(event_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.event_object_relationship",
+            "columns": [
+                "event_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.event",
+            "parent_columns": [
+                "event_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (event_id) REFERENCES event(event_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.event_object_relationship",
+            "columns": [
+                "object_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object",
+            "parent_columns": [
+                "object_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_id) REFERENCES object(object_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.event_object_relationship",
+            "columns": [
+                "qualifier_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.qualifier",
+            "parent_columns": [
+                "qualifier_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (qualifier_id) REFERENCES qualifier(qualifier_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object",
+            "columns": [
+                "object_type_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object_type",
+            "parent_columns": [
+                "object_type_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_type_id) REFERENCES object_type(object_type_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object_attribute",
+            "columns": [
+                "object_type_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object_type",
+            "parent_columns": [
+                "object_type_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_type_id) REFERENCES object_type(object_type_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object_attribute_value",
+            "columns": [
+                "object_attribute_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object_attribute",
+            "parent_columns": [
+                "object_attribute_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_attribute_id) REFERENCES object_attribute(object_attribute_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object_attribute_value",
+            "columns": [
+                "object_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object",
+            "parent_columns": [
+                "object_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_id) REFERENCES object(object_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object_relationship",
+            "columns": [
+                "object_child_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object",
+            "parent_columns": [
+                "object_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_child_id) REFERENCES object(object_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object_relationship",
+            "columns": [
+                "object_parent_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.object",
+            "parent_columns": [
+                "object_id"
+            ],
+            "parent_cardinality": "Exactly one",
+            "def": "FOREIGN KEY (object_parent_id) REFERENCES object(object_id)",
+            "virtual": false
+        },
+        {
+            "table": "public.object_relationship",
+            "columns": [
+                "qualifier_id"
+            ],
+            "cardinality": "Zero or more",
+            "parent_table": "public.qualifier",
+            "parent_columns": [
+                "qualifier_id"
+            ],
+            "parent_cardinality": "Zero or one",
+            "def": "FOREIGN KEY (qualifier_id) REFERENCES qualifier(qualifier_id)",
+            "virtual": false
+        }
+    ],
+    "functions": [],
+    "driver": {
+        "name": "postgres",
+        "database_version": "PostgreSQL 13.12 on x86_64-pc-linux-musl, compiled by gcc (Alpine 12.2.1_git20220924-r10) 12.2.1 20220924, 64-bit",
+        "meta": {
+            "current_schema": "public",
+            "search_paths": [
+                "\"$user\"",
+                "public"
+            ],
+            "dict": {
+                "Functions": "Stored procedures and functions"
+            }
+        }
+    }
+}

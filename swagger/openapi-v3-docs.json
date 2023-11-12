@@ -1,0 +1,1342 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "9.0.0.20220211 (pre-release)",
+    "title": "PostgREST API",
+    "description": "standard public schema"
+  },
+  "host": "127.0.0.1:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/vnd.pgrst.object+json",
+    "text/csv"
+  ],
+  "produces": [
+    "application/json",
+    "application/vnd.pgrst.object+json",
+    "text/csv"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Introspection"
+        ],
+        "summary": "OpenAPI description (this document)",
+        "produces": [
+          "application/openapi+json",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/event": {
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/event"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "event"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "event"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "event"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/event_attribute": {
+      "get": {
+        "tags": [
+          "event_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/event_attribute"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "event_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_attribute"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "event_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "event_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_attribute"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/event_attribute_value": {
+      "get": {
+        "tags": [
+          "event_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/event_attribute_value"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "event_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_attribute_value"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "event_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "event_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_attribute_value"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/event_object_relationship": {
+      "get": {
+        "tags": [
+          "event_object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/event_object_relationship"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "event_object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_object_relationship"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "event_object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "event_object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_object_relationship"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/event_type": {
+      "get": {
+        "tags": [
+          "event_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/event_type"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "event_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_type"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "event_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "event_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.event_type"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/object": {
+      "get": {
+        "tags": [
+          "object"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/object"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "object"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "object"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "object"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/object_attribute": {
+      "get": {
+        "tags": [
+          "object_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/object_attribute"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "object_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_attribute"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "object_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "object_attribute"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_attribute"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/object_attribute_value": {
+      "get": {
+        "tags": [
+          "object_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/object_attribute_value"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "object_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_attribute_value"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "object_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "object_attribute_value"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_attribute_value"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/object_relationship": {
+      "get": {
+        "tags": [
+          "object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/object_relationship"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_relationship"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "object_relationship"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_relationship"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/object_type": {
+      "get": {
+        "tags": [
+          "object_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/object_type"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "object_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_type"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "object_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "object_type"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.object_type"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/qualifier": {
+      "get": {
+        "tags": [
+          "qualifier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/qualifier"
+              },
+              "type": "array"
+            },
+            "description": "OK"
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "qualifier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.qualifier"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "qualifier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "qualifier"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.qualifier"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "event": {
+      "type": "object"
+    },
+    "event_attribute": {
+      "type": "object"
+    },
+    "event_attribute_value": {
+      "type": "object"
+    },
+    "event_object_relationship": {
+      "type": "object"
+    },
+    "event_type": {
+      "type": "object"
+    },
+    "object": {
+      "type": "object"
+    },
+    "object_attribute": {
+      "type": "object"
+    },
+    "object_attribute_value": {
+      "type": "object"
+    },
+    "object_relationship": {
+      "type": "object"
+    },
+    "object_type": {
+      "type": "object"
+    },
+    "qualifier": {
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "preferParams": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "in": "header",
+      "type": "string",
+      "enum": [
+        "params=single-object"
+      ]
+    },
+    "preferReturn": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "in": "header",
+      "type": "string",
+      "enum": [
+        "return=representation",
+        "return=minimal",
+        "return=none"
+      ]
+    },
+    "preferCount": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "in": "header",
+      "type": "string",
+      "enum": [
+        "count=none"
+      ]
+    },
+    "select": {
+      "name": "select",
+      "description": "Filtering Columns",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "on_conflict": {
+      "name": "on_conflict",
+      "description": "On Conflict",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "order": {
+      "name": "order",
+      "description": "Ordering",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "range": {
+      "name": "Range",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "header",
+      "type": "string"
+    },
+    "rangeUnit": {
+      "name": "Range-Unit",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "default": "items",
+      "in": "header",
+      "type": "string"
+    },
+    "offset": {
+      "name": "offset",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "limit": {
+      "name": "limit",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.event": {
+      "name": "event",
+      "description": "event",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/event"
+      },
+      "in": "body"
+    },
+    "body.event_attribute": {
+      "name": "event_attribute",
+      "description": "event_attribute",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/event_attribute"
+      },
+      "in": "body"
+    },
+    "body.event_attribute_value": {
+      "name": "event_attribute_value",
+      "description": "event_attribute_value",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/event_attribute_value"
+      },
+      "in": "body"
+    },
+    "body.event_object_relationship": {
+      "name": "event_object_relationship",
+      "description": "event_object_relationship",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/event_object_relationship"
+      },
+      "in": "body"
+    },
+    "body.event_type": {
+      "name": "event_type",
+      "description": "event_type",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/event_type"
+      },
+      "in": "body"
+    },
+    "body.object": {
+      "name": "object",
+      "description": "object",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/object"
+      },
+      "in": "body"
+    },
+    "body.object_attribute": {
+      "name": "object_attribute",
+      "description": "object_attribute",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/object_attribute"
+      },
+      "in": "body"
+    },
+    "body.object_attribute_value": {
+      "name": "object_attribute_value",
+      "description": "object_attribute_value",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/object_attribute_value"
+      },
+      "in": "body"
+    },
+    "body.object_relationship": {
+      "name": "object_relationship",
+      "description": "object_relationship",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/object_relationship"
+      },
+      "in": "body"
+    },
+    "body.object_type": {
+      "name": "object_type",
+      "description": "object_type",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/object_type"
+      },
+      "in": "body"
+    },
+    "body.qualifier": {
+      "name": "qualifier",
+      "description": "qualifier",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/qualifier"
+      },
+      "in": "body"
+    }
+  },
+  "externalDocs": {
+    "url": "https://postgrest.org/en/latest/api.html",
+    "description": "PostgREST Documentation"
+  }
+}

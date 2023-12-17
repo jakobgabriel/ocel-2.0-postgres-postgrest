@@ -1,11 +1,9 @@
---
 -- PostgreSQL database dump
---
 
 -- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
--- Started on 2023-11-06 20:41:36
+-- Adjusted for Docker initialization
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,28 +16,26 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---SELECT pg_terminate_backend(pg_stat_activity.pid)
---FROM pg_stat_activity
---WHERE pg_stat_activity.datname = 'ocelv2' 
---  AND pid <> pg_backend_pid();
+-- Ensure we are not in the 'ocelv2' database
+\c postgres
 
-DROP DATABASE IF EXISTS ocelv2;
-
---
--- TOC entry 3407 (class 1262 OID 16623)
--- Name: ocelv2; Type: DATABASE; Schema: -; Owner: postgres
---
-
+-- Use a DO block to handle the database creation logic
 DO $$
 BEGIN
-    IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'ocelv2') THEN
-        CREATE DATABASE ocelv2 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'German_Germany.1252';
+    -- Check if the 'ocelv2' database exists
+    IF EXISTS (SELECT FROM pg_database WHERE datname = 'ocelv2') THEN
+        -- If it exists, and we are not connected to it, drop it
+        RAISE NOTICE 'Dropping existing database ocelv2';
+        EXECUTE 'DROP DATABASE ocelv2';
     END IF;
+    
+    -- Create the database after dropping it, or if it didn't exist
+    RAISE NOTICE 'Creating database ocelv2';
+    EXECUTE 'CREATE DATABASE ocelv2 WITH TEMPLATE = template0 ENCODING = ''UTF8'' LOCALE = ''German_Germany.1252''';
 END
 $$;
 
 -- CREATE DATABASE ocelv2 
-
 
 ALTER DATABASE ocelv2 OWNER TO postgres;
 

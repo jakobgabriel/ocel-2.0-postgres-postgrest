@@ -494,7 +494,5 @@ ALTER TABLE ONLY public.object_relationship
     ADD CONSTRAINT object_relationship_qualifier_id_fkey FOREIGN KEY (qualifier_id) REFERENCES public.qualifier(qualifier_id);
 
 
+
 COMMIT;
-
---ANALYZE users;
-

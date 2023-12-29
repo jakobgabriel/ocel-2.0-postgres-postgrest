@@ -12,13 +12,13 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       DB_ANON_ROLE: ${DB_ANON_ROLE}
       DB_SCHEMA: ${DB_SCHEMA}
-      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-      PGRST_JWT_SECRET_IS_BASE64: ${PGRST_JWT_SECRET_IS_BASE64}
-      PGRST_JWT_AUD: ${PGRST_JWT_AUD}
+    #  PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+    #  PGRST_JWT_SECRET_IS_BASE64: ${PGRST_JWT_SECRET_IS_BASE64}
+    #  PGRST_JWT_AUD: ${PGRST_JWT_AUD}
     volumes:
       - "./initdb:/docker-entrypoint-initdb.d"
-    networks:
-      - postgrest-backend
+#    networks:
+#      - postgrest-backend
     restart: always
     command: ["postgres", "-c", "listen_addresses=*", "-c", "log_statement=all"]
 
@@ -37,8 +37,8 @@ services:
     volumes:
       - "./postgrest.conf:/etc/postgrest.conf"
     # command: ["postgrest", "/etc/postgrest.conf"]
-    networks:
-      - postgrest-backend
+#    networks:
+#      - postgrest-backend
     restart: always
 
   swagger-ui:
@@ -51,9 +51,9 @@ services:
     restart: always
     depends_on:
       - postgrest
-    networks:
-      - postgrest-backend
+#    networks:
+#      - postgrest-backend
 
-networks:
-  postgrest-backend:
-    driver: bridge
+#networks:
+#  postgrest-backend:
+#    driver: bridge

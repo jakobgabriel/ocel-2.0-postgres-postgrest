@@ -12,9 +12,9 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       DB_ANON_ROLE: ${DB_ANON_ROLE}
       DB_SCHEMA: ${DB_SCHEMA}
-    #  PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
-    #  PGRST_JWT_SECRET_IS_BASE64: ${PGRST_JWT_SECRET_IS_BASE64}
-    #  PGRST_JWT_AUD: ${PGRST_JWT_AUD}
+      PGRST_JWT_SECRET: ${PGRST_JWT_SECRET}
+      PGRST_JWT_SECRET_IS_BASE64: ${PGRST_JWT_SECRET_IS_BASE64}
+      PGRST_JWT_AUD: ${PGRST_JWT_AUD}
     volumes:
       - "./initdb:/docker-entrypoint-initdb.d"
 #    networks:
